@@ -1,2 +1,6 @@
 # riscv
-RISC-V based processor
+DYT is a RISC-V based processor
+
+A more detailed REAME is on the way
+
+...loading
