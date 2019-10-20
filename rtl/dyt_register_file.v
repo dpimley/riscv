@@ -20,7 +20,8 @@
 
 module dyt_register_file(
     
-    //Clock and write enable    
+    //Reset, Clock, and write enable
+    input wire          rst,
     input wire          clk,
     input wire          w_en,
     
