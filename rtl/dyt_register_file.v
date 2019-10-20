@@ -56,7 +56,7 @@ module dyt_register_file(
         end
     end
 
-    integer     r
+    integer     r;
     //Note bounds because x0 is zero
     always @(posedge clk or negedge rst) begin
         if(!rst) begin
