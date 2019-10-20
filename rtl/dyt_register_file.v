@@ -76,8 +76,3 @@ module dyt_register_file(
     assign r_b_data = rf_reg[r_b_addr];
 
 endmodule
-            
-         
-        
-
-endmodule
