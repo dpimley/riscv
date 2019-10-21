@@ -35,11 +35,11 @@ module dyt_register_file(
 
     //Read Port B
     input wire  [3:0]   r_b_addr,
-    output wire [31:0]  r_b_data,
+    output wire [31:0]  r_b_data
 );
 
-    localparam int unsigned ADDR_WIDTH  = 4;
-    localparam int unsigned NUM_WORDS   = 2**ADDR_WIDTH;
+    localparam ADDR_WIDTH  = 4;
+    localparam NUM_WORDS   = 2**ADDR_WIDTH;
 
     reg [NUM_WORDS-1:0][31:0]   rf_reg;
     reg [NUM_WORDS-1:0][31:0]   rf_reg_tmp; //I guess this is a shadow register of sorts
@@ -63,7 +63,7 @@ module dyt_register_file(
         if(!rst) begin
             /* I don't really know what the {default:'0} but I assume
                 that is means set everything to zero */
-            rf_reg_tmp <= '{default:'0};
+            rf_reg_tmp <= '0;
         end else begin
             for (r = 1; r < NUM_WORDS; r = r + 1) begin
                 if (w_en_dec[r]) rf_reg_temp[r] <= wdata;
