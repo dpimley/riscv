@@ -66,7 +66,7 @@ module dyt_register_file(
             rf_reg_tmp <= '0;
         end else begin
             for (r = 1; r < NUM_WORDS; r = r + 1) begin
-                if (w_en_dec[r]) rf_reg_temp[r] <= wdata;
+                if (w_en_dec[r]) rf_reg_tmp[r] <= w_data;
             end
         end
     end
