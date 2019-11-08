@@ -1,7 +1,7 @@
 /*
 Description: Shared types folder that will make life easier
 
-Author: Yash Bharatula
+Author: Yash Bharatula, David Pimley
 */
 
 `ifndef COMMON_TYPES_VH
@@ -16,6 +16,125 @@ package common_types;
     typedef logic   [WORD_W-1:0]                    word_t;
     typedef logic   [(WORD_W/2)-1:0]                hword_t;
     typedef logic   [(WORD_W/WBYTES):0]             byte_t;
+    
+    // Opcode Formatting
+    parameter OPCODE_W          = 7;
+    
+    typedef enum logic [OPCODE_W-1:0] {
+        OPCODE_LUI              = 7'b0110111,
+        OPCODE_AUIPC            = 7'b0010111,
+        OPCODE_JAL              = 7'b1101111,
+        OPCODE_JALR             = 7'b1100111,
+        OPCODE_BRANCH           = 7'b1100011,
+        OPCODE_LOAD             = 7'b0000011,
+        OPCODE_STORE            = 7'b0100011,
+        OPCODE_ITYPE            = 7'b0010011,
+        OPCODE_RTYPE            = 7'b0110011
+    } opcode_t;
+    
+    // Funct3 Formatting
+    parameter FUNCT3_W          = 3;
+    
+    // JALR Funct3 Types
+    typedef enum logic [FUNCT3_W-1:0] {
+        FUNCT3_LUI              = 3'b000
+    } funct3_jalr_t;
+    
+    // Branch Funct3 Types
+    typedef enum logic [FUNCT3_W-1:0] {
+        FUNCT3_BEQ              = 3'b000,
+        FUNCT3_BNE              = 3'b001,
+        FUNCT3_BLT              = 3'b100,
+        FUNCT3_BGE              = 3'b101,
+        FUNCT3_BLTU             = 3'b110,
+        FUNCT3_BGEU             = 3'b111
+    } funct3_branch_t;
+    
+    // Load Funct3 Types
+    typedef enum logic [FUNCT3_W-1:0] {
+        FUNCT3_LB               = 3'b000,
+        FUNCT3_LH               = 3'b001,
+        FUNCT3_LW               = 3'b010,
+        FUNCT3_LBU              = 3'b100,
+        FUNCT3_LHU              = 3'b101
+    } funct3_load_t;
+    
+    // Store Funct3 Types
+    typedef enum logic [FUNCT3_W-1:0] {
+        FUNCT3_SB               = 3'b000,
+        FUNCT3_SH               = 3'b001,
+        FUNCT3_SW               = 3'b010
+    } funct3_store_t;
+    
+    // Immediate Funct3 Types
+    typedef enum logic [FUNCT3_W-1:0] {
+        FUNCT3_ADDI             = 3'b000,
+        FUNCT3_SLTI             = 3'b010,
+        FUNCT3_SLTIU            = 3'b011,
+        FUNCT3_XORI             = 3'b100,
+        FUNCT3_ORI              = 3'b110,
+        FUNCT3_ANDI             = 3'b111,
+        FUNCT3_SLLI             = 3'b001,
+        FUNCT3_SRLI             = 3'b101,
+        FUNCT3_SRAI             = 3'b101
+    } funct3_immediate_t;
+    
+    // Register Funct3 Types
+    typedef enum logic [FUNCT3_W-1:0] {
+        FUNCT3_ADD              = 3'b000,
+        FUNCT3_SUB              = 3'b000,
+        FUNCT3_SLL              = 3'b001,
+        FUNCT3_SLT              = 3'b010,
+        FUNCT3_SLTU             = 3'b011,
+        FUNCT3_XOR              = 3'b100,
+        FUNCT3_SRL              = 3'b101,
+        FUNCT3_SRA              = 3'b101,
+        FUNCT3_OR               = 3'b110,
+        FUNCT3_AND              = 3'b111
+    } funct3_register_t;
+    
+    // Funct7 Formatting
+    parameter FUNCT7_W          = 7;
+    
+    // Register Type Funct7 Types
+    typedef enum logic [FUNCT7_W-1:0] {
+        FUNCT7_ADD              = 7'b0000000,
+        FUNCT7_SUB              = 7'b0100000,
+        FUNCT7_SLL              = 7'b0000000,
+        FUNCT7_SLT              = 7'b0000000,
+        FUNCT7_SLTU             = 7'b0000000,
+        FUNCT7_XOR              = 7'b0000000,
+        FUNCT7_SRL              = 7'b0000000,
+        FUNCT7_SRA              = 7'b0100000,
+        FUNCT7_OR               = 7'b0000000,
+        FUNCT7_AND              = 7'b0000000
+    } funct7_register_t;
+    
+    // Immediate Type Funct7 Types (Shift, Not necessarily funct7 but rather msb 7 bits)
+    typedef enum logic [FUNCT7_W-1:0] {
+        FUNCT7_SLLI             = 7'b0000000,
+        FUNCT7_SRLI             = 7'b0000000,
+        FUNCT7_SRAI             = 7'b0100000
+    } funct7_immediate_t;
+    
+    // ALU Opcodes & Operations
+    parameter ALU_OP_W          = 4;
+    
+    // ALU Opcode & Operations Types
+    typedef enum logic [ALU_OP_W-1:0] {
+        ALU_ADD,
+        ALU_ADDU,
+        ALU_SUB,
+        ALU_SUBU,
+        ALU_OR,
+        ALU_AND,
+        ALU_XOR,
+        ALU_SRA,
+        ALU_SRL,
+        ALU_SLL,
+        ALU_SLT,
+        ALU_SLTU
+    } alu_op_t;
     
     // Register File Configurations & Types
     parameter RF_REGISTERS                          = 16;
