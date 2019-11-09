@@ -28,12 +28,12 @@ module dyt_alu(
                                       (alu_if.alu_port_0[WORD_W-1] ~^ alu_if.alu_port_out[WORD_W-1]);
             end
             ALU_SUB: begin
-                alu_if.alu_port_out = $signed(alu_if.alu_port_0) + $signed(alu_if.alu_port_1);
+                alu_if.alu_port_out = $signed(alu_if.alu_port_1) - $signed(alu_if.alu_port_0);
                 alu_if.alu_overflow = (alu_if.alu_port_0[WORD_W-1] ~^ alu_if.alu_port_1[WORD_W-1]) & 
                                       (alu_if.alu_port_0[WORD_W-1] ^ alu_if.alu_port_out[WORD_W-1]);
             end
             ALU_SUBU: begin
-                alu_if.alu_port_out = $signed(alu_if.alu_port_0) + $signed(alu_if.alu_port_1);
+                alu_if.alu_port_out = (alu_if.alu_port_1) - (alu_if.alu_port_0);
                 alu_if.alu_overflow = (alu_if.alu_port_0[WORD_W-1] ~^ alu_if.alu_port_1[WORD_W-1]) & 
                                       (alu_if.alu_port_0[WORD_W-1] ^ alu_if.alu_port_out[WORD_W-1]);
             end
