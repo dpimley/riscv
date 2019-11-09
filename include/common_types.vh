@@ -75,20 +75,17 @@ package common_types;
         FUNCT3_ORI              = 3'b110,
         FUNCT3_ANDI             = 3'b111,
         FUNCT3_SLLI             = 3'b001,
-        FUNCT3_SRLI             = 3'b101,
-        FUNCT3_SRAI             = 3'b101
+        FUNCT3_SRI              = 3'b101            // shift right
     } funct3_immediate_t;
     
     // Register Funct3 Types
     typedef enum logic [FUNCT3_W-1:0] {
-        FUNCT3_ADD              = 3'b000,
-        FUNCT3_SUB              = 3'b000,
+        FUNCT3_ARITH            = 3'b000,           // add / sub
         FUNCT3_SLL              = 3'b001,
         FUNCT3_SLT              = 3'b010,
         FUNCT3_SLTU             = 3'b011,
         FUNCT3_XOR              = 3'b100,
-        FUNCT3_SRL              = 3'b101,
-        FUNCT3_SRA              = 3'b101,
+        FUNCT3_SR               = 3'b101,           // shift right
         FUNCT3_OR               = 3'b110,
         FUNCT3_AND              = 3'b111
     } funct3_register_t;
@@ -98,23 +95,14 @@ package common_types;
     
     // Register Type Funct7 Types
     typedef enum logic [FUNCT7_W-1:0] {
-        FUNCT7_ADD              = 7'b0000000,
-        FUNCT7_SUB              = 7'b0100000,
-        FUNCT7_SLL              = 7'b0000000,
-        FUNCT7_SLT              = 7'b0000000,
-        FUNCT7_SLTU             = 7'b0000000,
-        FUNCT7_XOR              = 7'b0000000,
-        FUNCT7_SRL              = 7'b0000000,
-        FUNCT7_SRA              = 7'b0100000,
-        FUNCT7_OR               = 7'b0000000,
-        FUNCT7_AND              = 7'b0000000
+        FUNCT7_TYP              = 7'b0000000,       // most instructions
+        FUNCT7_ATYP             = 7'b0100000        // sub and sra
     } funct7_register_t;
     
     // Immediate Type Funct7 Types (Shift, Not necessarily funct7 but rather msb 7 bits)
     typedef enum logic [FUNCT7_W-1:0] {
-        FUNCT7_SLLI             = 7'b0000000,
-        FUNCT7_SRLI             = 7'b0000000,
-        FUNCT7_SRAI             = 7'b0100000
+        FUNCT7_SL               = 7'b0000000,       // logical shift left & right
+        FUNCT7_SRAI             = 7'b0100000        // arithmetic shift right
     } funct7_immediate_t;
     
     // ALU Opcodes & Operations
@@ -141,9 +129,10 @@ package common_types;
     parameter RF_ADDRESS_WIDTH                      = $clog2(RF_REGISTERS);
     
     typedef logic   [RF_ADDRESS_WIDTH-1:0]          rf_addr_t;
-    typedef logic   [WORD_W-1:0][RF_REGISTERS-1:0]  rf_t;
+    typedef logic   [RF_REGISTERS-1:0][WORD_W-1:0]  rf_t;
     
     // SRAM Configurations
+    parameter SRAM_MEMORY_SIZE                      = 2048;
     parameter SRAM_ADDR_WIDTH                       = $clog2(SRAM_MEMORY_SIZE);
     parameter SRAM_AUTO_SLEEP                       = 0;
     parameter SRAM_BYTE_WRITE_WIDTH                 = WORD_W;
@@ -153,7 +142,6 @@ package common_types;
     parameter SRAM_MEMORY_INIT_PARAM                = "0";
     parameter SRAM_MEMORY_OPTIMIZATION              = "true";
     parameter SRAM_MEMORY_PRIMITIVE                 = "auto";
-    parameter SRAM_MEMORY_SIZE                      = 2048;
     parameter SRAM_MESSAGE_CONTROL                  = 0;
     parameter SRAM_READ_DATA_WIDTH                  = WORD_W;
     parameter SRAM_READ_LATENCY                     = 2;

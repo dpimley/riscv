@@ -26,13 +26,13 @@ import common_types::*;
 module dyt_register_file
 (    
     //Reset, Clock, and write enable
-    input wire          clk,
-    input wire          n_rst,
+    input logic          clk,
+    input logic          n_rst,
     dyt_register_file_if.rf rf_if
 );
 
-    rf                  rf_reg;
-    word_t              n_rf_data; //I guess this is a shadow register of sorts
+    rf_t                rf_reg;
+    word_t              n_rf_data;
 
     // Update Logic for the Register File
     always @(posedge clk, negedge n_rst) begin

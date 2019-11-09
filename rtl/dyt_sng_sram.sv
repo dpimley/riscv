@@ -5,7 +5,7 @@ Author: David Pimley
 */
 
 `include "common_types.vh"
-`include "dyt_ram_if.vh"
+`include "dyt_sram_if.vh"
 
 import common_types::*;
 
