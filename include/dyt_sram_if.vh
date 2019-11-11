@@ -26,7 +26,7 @@ interface dyt_sram_if;
     
     // CPU -> SRAM
     modport cpu (
-        input sram_w_data,
+        input sram_r_data,
         output sram_address, sram_w_data, sram_ren, sram_wen
     );
     

@@ -11,6 +11,9 @@ package common_types;
 
     // Common Configurations & Types
     parameter WORD_W    = 32;
+    parameter HWORD_W   = WORD_W/2;
+    parameter BYTE_W    = 8;
+   
     parameter WBYTES    = WORD_W/8;
     
     typedef logic   [WORD_W-1:0]                    word_t;
@@ -130,6 +133,15 @@ package common_types;
     
     typedef logic   [RF_ADDRESS_WIDTH-1:0]          rf_addr_t;
     typedef logic   [RF_REGISTERS-1:0][WORD_W-1:0]  rf_t;
+    
+    // LSU Configurations & Types
+    typedef enum logic [1:0] {
+        MEM_W_WORD,
+        MEM_W_HWORD,
+        MEM_W_HWORDU,
+        MEM_W_BYTE,
+        MEM_W_BYTEU
+    } lsu_mem_w_type_t;
     
     // SRAM Configurations
     parameter SRAM_MEMORY_SIZE                      = 2048;
